@@ -1,0 +1,26 @@
+{
+	"cli": {
+		"appVersionSource": "remote",
+		"version": "16.18.0"
+	},
+	"build": {
+		"preview": {
+			"android": {
+				"buildType": "apk",
+				"gradleCommand": ":app:assembleRelease"
+			}
+		},
+		"standalone": {
+			"android": {
+				"buildType": "apk",
+				"gradleCommand": ":app:assembleRelease"
+			}
+		},
+		"production": {
+			"autoIncrement": true,
+			"android": {
+				"buildType": "app-bundle"
+			}
+		}
+	}
+}
