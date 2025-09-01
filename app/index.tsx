@@ -26,7 +26,6 @@ export default function Index() {
 	const [hasError, setHasError] = useState(false);
 	const [canGoBack, setCanGoBack] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
-	const [currentUrl, setCurrentUrl] = useState("");
 	const [hasInitiallyLoaded, setHasInitiallyLoaded] = useState(false);
 	const webViewRef = useRef<WebView>(null);
 
@@ -95,7 +94,6 @@ export default function Index() {
 	const handleNavigationStateChange = (navState: any) => {
 		console.log("WebView: Navigation state changed", navState);
 		setCanGoBack(navState.canGoBack);
-		setCurrentUrl(navState.url);
 
 		// Only handle loading state for initial load
 		if (!navState.loading && !hasInitiallyLoaded) {
@@ -129,7 +127,6 @@ export default function Index() {
 			<View style={styles.errorContainer}>
 				<Text style={styles.errorTitle}>Navigation Error</Text>
 				<Text style={styles.errorText}>{errorMessage}</Text>
-				<Text style={styles.errorText}>Current URL: {currentUrl}</Text>
 				<Text style={[styles.errorText, styles.retryButton]} onPress={handleReload}>
 					Tap to Retry
 				</Text>
@@ -151,7 +148,7 @@ export default function Index() {
 			{isLoading && (
 				<View style={styles.loadingContainer}>
 					<Image
-						source={require("../asset/images/logo-large.png")}
+						source={require("../assets/images/logo-large.png")}
 						style={styles.logo}
 						resizeMode="contain"
 					/>
@@ -269,7 +266,6 @@ export default function Index() {
 						const data = JSON.parse(event.nativeEvent.data);
 						if (data.type === "navigation") {
 							console.log("Navigation detected:", data.url);
-							setCurrentUrl(data.url);
 						}
 					} catch (error) {
 						console.log("Message parsing error:", error);
