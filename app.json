@@ -1,5 +1,6 @@
 {
 	"expo": {
+		"scheme": "com.ryanzayne.cyberaware",
 		"name": "CYBERAWARE",
 		"slug": "cyberaware",
 		"version": "1.0.0",
@@ -37,24 +38,15 @@
 			"permissions": [
 				"android.permission.INTERNET",
 				"android.permission.ACCESS_NETWORK_STATE",
-				"android.permission.ACCESS_WIFI_STATE"
+				"android.permission.ACCESS_WIFI_STATE",
+				"android.permission.WRITE_EXTERNAL_STORAGE",
+				"android.permission.READ_EXTERNAL_STORAGE"
 			],
-			"usesCleartextTraffic": true,
-			"networkSecurityConfig": {
-				"domain-config": [
-					{
-						"domain": "cyber-aware.netlify.app",
-						"cleartextTrafficPermitted": true
-					},
-					{
-						"domain": "netlify.app",
-						"cleartextTrafficPermitted": true
-					}
-				]
-			},
+			"allowBackup": false,
 			"intentFilters": [
 				{
 					"action": "VIEW",
+					"autoVerify": true,
 					"data": [
 						{
 							"scheme": "https"

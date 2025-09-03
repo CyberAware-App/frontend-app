@@ -1,10 +1,7 @@
-// https://docs.expo.dev/guides/using-eslint/
-const { defineConfig } = require("eslint/config");
-const expoConfig = require("eslint-config-expo/flat");
+import { zayne } from "@zayne-labs/eslint-config";
 
-module.exports = defineConfig([
-	expoConfig,
-	{
-		ignores: ["dist/*"],
-	},
-]);
+export default zayne({
+	expo: true,
+	ignores: ["dist/**", "build/**", ".expo/**", "scripts"],
+	react: true,
+});
