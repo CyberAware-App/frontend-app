@@ -81,7 +81,6 @@ export default function Index() {
 		webViewRef.current?.reload();
 	};
 
-	// Effects
 	useEffect(() => {
 		// eslint-disable-next-line react-web-api/no-leaked-event-listener
 		const backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
@@ -106,7 +105,6 @@ export default function Index() {
 		};
 	}, [canGoBack, isLoading]);
 
-	// Render Error Screen
 	if (hasError) {
 		return (
 			<View style={styles.errorContainer}>
@@ -122,7 +120,6 @@ export default function Index() {
 		);
 	}
 
-	// Main Render
 	return (
 		<View style={styles.container}>
 			{isLoading && (
