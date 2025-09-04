@@ -192,23 +192,38 @@ export default function Index() {
 								const element = originalCreateElement.call(this, tagName);
 								if (tagName.toLowerCase() === 'a') {
 									const originalClick = element.click;
-									element.click = function() {
+									element.click = function(e) {
 										// Check if this is a download link with .pdf extension
 										if (this.download && (this.download.includes('.pdf') || this.href.startsWith('blob:'))) {
 											// Prevent the download
-											event?.preventDefault?.();
-											event?.stopPropagation?.();
+											if (e) {
+												e.preventDefault();
+												e.stopPropagation();
+											}
 
 											window.ReactNativeWebView?.postMessage(JSON.stringify({
 												type: 'certificateDownload'
 											}));
 											return false;
 										}
-										return originalClick.call(this);
+										return originalClick.call(this, e);
 									};
 								}
 								return element;
 							};
+
+							// Also add a global listener for any download attempts
+							document.addEventListener('click', (e) => {
+								const target = e.target.closest('a');
+								if (target && target.download && (target.download.includes('.pdf') || target.href.startsWith('blob:'))) {
+									e.preventDefault();
+									e.stopPropagation();
+									window.ReactNativeWebView?.postMessage(JSON.stringify({
+										type: 'certificateDownload'
+									}));
+								}
+							}, true);
+						};
 
 						setupViewport();
 						interceptDownloads();
