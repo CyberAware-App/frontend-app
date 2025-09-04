@@ -33,7 +33,6 @@ export default function Index() {
 	const [hasInitiallyLoaded, setHasInitiallyLoaded] = useState(false);
 	const webViewRef = useRef<WebView>(null);
 
-	// Event Handlers
 	const handleLoadStart = () => {
 		if (!hasInitiallyLoaded) {
 			setIsLoading(true);
